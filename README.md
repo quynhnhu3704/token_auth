@@ -83,6 +83,21 @@ Server chạy tại: `http://localhost:3000`
 }
 ```
 
+## Thêm tính năng Token Expired
+
+Trong file **routes/auth.js**, phần sinh token ở route `/login` được chỉnh lại như sau để token hết hạn sau 10 giây:
+
+```js
+// Generate token with short expiry (10s)
+const token = jwt.sign(
+  { id: user._id },
+  'secretKey',
+  { expiresIn: '10s' }
+);
+```
+
+Như vậy sau 10 giây, token sẽ hết hạn và khi gọi lại `/profile` sẽ nhận thông báo `TokenExpiredError`.
+
 ---
 
 ## Hình minh họa
@@ -118,3 +133,13 @@ Server chạy tại: `http://localhost:3000`
 
 ![Profile with Token](public/results/profile_token.png)
 *Gọi `/profile` với Bearer Token hợp lệ*
+
+---
+
+### Token Expired
+
+![Token Expired](public/results/token_expired.png)
+*Gọi `/profile` sau khi token hết hạn (ví dụ 10 giây) → báo lỗi token expired*
+
+![Code Token Expired](public/results/code_token_expired.png)
+*Đoạn code cấu hình token với thời gian sống ngắn (expiresIn: '10s')*

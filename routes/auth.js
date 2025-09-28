@@ -27,16 +27,14 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Find user
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ error: 'User not found' });
 
-    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
 
-    // Generate token
-    const token = jwt.sign({ id: user._id }, 'secretKey', { expiresIn: '1h' });
+    // Token chỉ sống 10 giây
+    const token = jwt.sign({ id: user._id }, 'secretKey', { expiresIn: '10s' });
 
     res.json({ token });
   } catch (err) {
@@ -53,10 +51,14 @@ function authMiddleware(req, res, next) {
     const verified = jwt.verify(token, 'secretKey');
     req.user = verified;
     next();
-  } catch {
+  } catch (err) {
+    if (err.name === 'TokenExpiredError') {
+      return res.status(401).json({ error: 'Token expired, please login again' });
+    }
     res.status(400).json({ error: 'Invalid token' });
   }
 }
+
 
 // Protected route
 router.get('/profile', authMiddleware, async (req, res) => {
