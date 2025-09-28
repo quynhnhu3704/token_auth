@@ -87,6 +87,13 @@ Server chạy tại: `http://localhost:3000`
 
 ## Hình minh họa
 
+### Profile
+
+![Profile](public/results/profile.png)
+*Gọi `/profile`*
+
+---
+
 ### Register
 
 ![Register](public/results/register.png)
@@ -107,9 +114,7 @@ Server chạy tại: `http://localhost:3000`
 
 ---
 
-### Profile
+### Profile with Token
 
-![Profile](public/results/profile.png)
+![Profile](public/results/profile_token.png)
 *Gọi `/profile` với Bearer Token hợp lệ*
-
----
