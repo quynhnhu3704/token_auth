@@ -105,9 +105,6 @@ Server chạy tại: `http://localhost:3000`
 ![Cookies](public/results/cookies.png)
 *Cookie sau khi login (tham khảo)*
 
-![Login - MongoDB Sessions](public/results/login_mongo_sessions.png)
-*Kiểm tra collection `sessions` trong MongoDB sau khi login*
-
 ---
 
 ### Profile
@@ -116,8 +113,3 @@ Server chạy tại: `http://localhost:3000`
 *Gọi `/profile` với Bearer Token hợp lệ*
 
 ---
-
-### Logout
-
-![Logout - MongoDB Sessions](public/results/logout_mongo_sessions.png)
-*Kiểm tra collection `sessions` trong MongoDB sau khi logout*
